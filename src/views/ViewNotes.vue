@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
+import Note from '@/components/notes/Note.vue'
 
 const newNoteBox = useTemplateRef('new-note-box')
 const newNote = ref('')
@@ -53,17 +54,7 @@ const addNote = () => {
       </div>
     </div>
 
-    <div v-for="note in notes" :key="note.id" class="card nb-4">
-      <div class="card-content">
-        <div class="content">
-          {{ note.content }}
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+    <Note v-for="note in notes" :key="note.id" :note />
   </div>
 </template>
 
