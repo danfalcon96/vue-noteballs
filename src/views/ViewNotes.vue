@@ -25,6 +25,9 @@ const addNote = () => {
   newNote.value = ''
   newNoteBox.value?.focus()
 }
+const deleteNote = (id: string) => {
+  notes.value = notes.value.filter((note) => note.id !== id)
+}
 </script>
 
 <template>
@@ -54,7 +57,7 @@ const addNote = () => {
       </div>
     </div>
 
-    <Note v-for="note in notes" :key="note.id" :note />
+    <Note v-for="note in notes" :key="note.id" :note @deleteClicked="deleteNote" />
   </div>
 </template>
 

@@ -8,10 +8,16 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['deleteClicked'])
+
 const characterLength = computed(() => {
   let length = props.note.content.length
   return `${length} character${length > 1 ? 's' : ''}`
 })
+
+const deleteClicked = () => {
+  emit('deleteClicked', props.note.id)
+}
 </script>
 
 <template>
@@ -26,7 +32,7 @@ const characterLength = computed(() => {
     </div>
     <footer class="card-footer">
       <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="deleteClicked">Delete</a>
     </footer>
   </div>
 </template>
