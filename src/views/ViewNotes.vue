@@ -1,32 +1,24 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
 import Note from '@/components/notes/Note.vue'
+import { useStoreNotes } from '@/stores/storeNotes.ts'
 
 const newNoteBox = useTemplateRef('new-note-box')
 const newNote = ref('')
-const notes = ref([
-  {
-    id: 'id1',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut autem commodiconsectetur dicta eligendi incidunt, ipsum natus non saepe! Ad autem delectus enim evenietexplicabo laboriosam quidem quis vel.',
-  },
-  {
-    id: 'id2',
-    content: 'This is a shorter note!',
-  },
-])
+const storeNotes = useStoreNotes()
+
 const addNote = () => {
   let note = {
     id: new Date().getTime().toFixed(),
     content: newNote.value,
   }
 
-  notes.value.unshift(note)
+  storeNotes.notes.unshift(note)
   newNote.value = ''
   newNoteBox.value?.focus()
 }
 const deleteNote = (id: string) => {
-  notes.value = notes.value.filter((note) => note.id !== id)
+  storeNotes.notes = storeNotes.notes.filter((note) => note.id !== id)
 }
 </script>
 
@@ -57,7 +49,7 @@ const deleteNote = (id: string) => {
       </div>
     </div>
 
-    <Note v-for="note in notes" :key="note.id" :note @deleteClicked="deleteNote" />
+    <Note v-for="note in storeNotes.notes" :key="note.id" :note @deleteClicked="deleteNote" />
   </div>
 </template>
 
