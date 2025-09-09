@@ -1,4 +1,4 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useStoreNotes = defineStore('storeNotes', () => {
@@ -14,7 +14,15 @@ export const useStoreNotes = defineStore('storeNotes', () => {
     },
   ])
 
+  const addNote = (note: string) => {
+    notes.value.unshift({
+      id: new Date().getTime().toFixed(),
+      content: note,
+    })
+  }
+
   return {
     notes,
+    addNote,
   }
 })

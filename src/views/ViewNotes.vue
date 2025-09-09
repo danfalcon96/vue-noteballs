@@ -8,12 +8,7 @@ const newNote = ref('')
 const storeNotes = useStoreNotes()
 
 const addNote = () => {
-  let note = {
-    id: new Date().getTime().toFixed(),
-    content: newNote.value,
-  }
-
-  storeNotes.notes.unshift(note)
+  storeNotes.addNote(newNote.value)
   newNote.value = ''
   newNoteBox.value?.focus()
 }
