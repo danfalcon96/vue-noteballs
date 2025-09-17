@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useStoreNotes } from '@/stores/storeNotes.ts'
+
+const storeNotes = useStoreNotes()
 
 const props = defineProps({
   note: {
@@ -8,15 +11,13 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['deleteClicked'])
-
 const characterLength = computed(() => {
   let length = props.note.content.length
   return `${length} character${length > 1 ? 's' : ''}`
 })
 
 const deleteClicked = () => {
-  emit('deleteClicked', props.note.id)
+  storeNotes.deleteNote(props.note.id)
 }
 </script>
 

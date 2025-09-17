@@ -21,8 +21,13 @@ export const useStoreNotes = defineStore('storeNotes', () => {
     })
   }
 
+  const deleteNote = (noteId: string) => {
+    notes.value = notes.value.filter((note) => note.id !== noteId)
+  }
+
   return {
     notes,
     addNote,
+    deleteNote,
   }
 })
