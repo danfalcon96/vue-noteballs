@@ -1,9 +1,21 @@
 <script setup lang="ts">
-const props = defineProps({
+import { useTemplateRef } from 'vue'
+
+defineProps({
   modelValue: String,
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+const noteTextAreaRef = useTemplateRef('noteTextAreaRef')
+
+const focusTextArea = () => {
+  if (noteTextAreaRef.value) noteTextAreaRef.value.focus()
+}
+
+defineExpose({
+  focusTextArea,
+})
 </script>
 
 <template>
@@ -11,8 +23,9 @@ const emit = defineEmits(['update:modelValue'])
     <div class="field">
       <div class="control">
         <textarea
+          ref="noteTextAreaRef"
           :value="modelValue"
-          @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+          @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
           class="textarea"
           placeholder="Write a note here"
         />
