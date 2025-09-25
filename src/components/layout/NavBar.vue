@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const showMobileNav = ref(false)
+
+const hideMobileNav = () => {
+  showMobileNav.value = false
+}
 </script>
 
 <template>
@@ -26,8 +30,17 @@ const showMobileNav = ref(false)
 
       <div id="noteballs-main-menu" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
         <div class="navbar-end">
-          <RouterLink to="/" class="navbar-item" active-class="is-active"> Notes </RouterLink>
-          <RouterLink to="/stats" class="navbar-item" active-class="is-active"> Stats </RouterLink>
+          <RouterLink to="/" class="navbar-item" active-class="is-active" @click="hideMobileNav">
+            Notes
+          </RouterLink>
+          <RouterLink
+            to="/stats"
+            class="navbar-item"
+            active-class="is-active"
+            @click="hideMobileNav"
+          >
+            Stats
+          </RouterLink>
         </div>
       </div>
     </div>
