@@ -25,6 +25,10 @@ export const useStoreNotes = defineStore('storeNotes', () => {
     notes.value = notes.value.filter((note) => note.id !== noteId)
   }
 
+  const updateNote = (noteId: string, noteContent: string) => {
+    notes.value[notes.value.findIndex((note) => note.id === noteId)].content = noteContent
+  }
+
   const getNoteContent = computed(() => {
     return (id: string) => {
       return notes.value.filter((note) => note.id === id)[0].content
@@ -35,6 +39,7 @@ export const useStoreNotes = defineStore('storeNotes', () => {
     notes,
     addNote,
     deleteNote,
+    updateNote,
     getNoteContent,
   }
 })

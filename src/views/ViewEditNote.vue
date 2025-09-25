@@ -9,6 +9,11 @@ const noteContent = ref('')
 const router = useRouter()
 const route = useRoute()
 
+const handleSaveClicked = () => {
+  storeNotes.updateNote(route.params.id.toString(), noteContent.value)
+  router.push('/')
+}
+
 noteContent.value = storeNotes.getNoteContent(route.params.id.toString())
 </script>
 
@@ -22,8 +27,12 @@ noteContent.value = storeNotes.getNoteContent(route.params.id.toString())
       label="Edit Note"
     >
       <template #form-button>
-        <button class="button is-link is-light" @click="router.back()">Cancel</button>
-        <button class="button is-link has-background-link" :disabled="!noteContent">
+        <button class="button is-link is-light mr-3" @click="router.back()">Cancel</button>
+        <button
+          class="button is-link has-background-link"
+          :disabled="!noteContent"
+          @click="handleSaveClicked"
+        >
           Save Note
         </button>
       </template>
