@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 
-defineProps({
-  modelValue: String,
-})
+withDefaults(
+  defineProps<{
+    modelValue: string
+    bgColor?: string
+    placeholder?: string
+    label?: string
+  }>(),
+  { bgColor: 'success', placeholder: 'Type something...' },
+)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -19,7 +25,9 @@ defineExpose({
 </script>
 
 <template>
-  <div class="card has-background-success-dark p-4 mb-5">
+  <div class="card p-4 mb-5" :class="`has-background-${bgColor}-dark`">
+    <label v-if="label" class="label has-text-white">{{ label }}</label>
+
     <div class="field">
       <div class="control">
         <textarea
@@ -27,7 +35,7 @@ defineExpose({
           :value="modelValue"
           @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
           class="textarea"
-          placeholder="Write a note here"
+          :placeholder="placeholder"
         />
       </div>
     </div>
