@@ -1,12 +1,28 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import AddEditNote from '@/components/notes/AddEditNote.vue'
+import { ref } from 'vue'
 
-const route = useRoute()
+const noteContent = ref('')
+const router = useRouter()
 </script>
 
 <template>
   <div class="edit-note">
-    <h1>Edit Note with an id of: {{ route.params.id }}</h1>
+    <AddEditNote
+      v-model="noteContent"
+      ref="addEditNoteRef"
+      bg-color="link"
+      placeholder="Edit note"
+      label="Edit Note"
+    >
+      <template #form-button>
+        <button class="button is-link is-light" @click="router.back()">Cancel</button>
+        <button class="button is-link has-background-link" :disabled="!noteContent">
+          Save Note
+        </button>
+      </template>
+    </AddEditNote>
   </div>
 </template>
 
