@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { vAutoFocus } from '@/directives/vAutoFocus.ts'
 
 withDefaults(
   defineProps<{
@@ -36,6 +37,7 @@ defineExpose({
           @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
           class="textarea"
           :placeholder="placeholder"
+          v-auto-focus
         />
       </div>
     </div>

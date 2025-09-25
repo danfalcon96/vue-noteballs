@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useStoreNotes } from '@/stores/storeNotes.ts'
+import { vAutoFocus } from '@/directives/vAutoFocus.ts'
 
 const storeNotes = useStoreNotes()
 </script>
@@ -24,6 +25,7 @@ const storeNotes = useStoreNotes()
         </tr>
       </tbody>
     </table>
+    <input type="text" class="input" placeholder="Do you love noteballs?" v-auto-focus />
   </div>
 </template>
 
